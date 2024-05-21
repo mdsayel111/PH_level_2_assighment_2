@@ -23,4 +23,9 @@ const productSchema = new Schema<TProduct>({
     }
 });
 
+productSchema.pre("updateOne", function (next) {
+    console.log(this)
+    next()
+})
+
 export const Product = model<TProduct>('Product', productSchema);
