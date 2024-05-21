@@ -12,4 +12,11 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
 });
 
+app.all("*", (req: Request, res: Response)=> {
+res.status(404).send({
+    success: false,
+    message: "No route found!",
+})
+})
+
 export default app;

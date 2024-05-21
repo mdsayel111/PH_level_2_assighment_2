@@ -9,6 +9,11 @@ const getAllProduct = () => {
     const result = Product.find({})
     return result
 }
+
+const searchProduct = (query: Record<string, string>) => {
+    const result = Product.find({ name: new RegExp(query.searchTerm, "i") })
+    return result
+}
 const getSingleProduct = (productId: string) => {
     const result = Product.findById(productId)
     return result
@@ -20,7 +25,7 @@ const updateSingleProduct = (productId: string, productData: any) => {
 }
 
 const deleteSingleProduct = (productId: string) => {
-    const result = Product.updateOne({ _id: productId }, { isDelete: true })
+    const result = Product.deleteOne({ _id: productId })
     return result
 }
 
@@ -29,5 +34,6 @@ export default {
     getAllProduct,
     getSingleProduct,
     updateSingleProduct,
-    deleteSingleProduct
+    deleteSingleProduct,
+    searchProduct
 }
