@@ -5,15 +5,19 @@ const creatProduct = (data: TProduct) => {
     const result = Product.create(data)
     return result
 }
+
 const getAllProduct = () => {
     const result = Product.find({})
     return result
 }
 
 const searchProduct = (query: Record<string, string>) => {
-    const result = Product.find({ name: new RegExp(query.searchTerm, "i") })
+    const result = Product.find({
+        name: new RegExp(query.searchTerm, "i")
+    })
     return result
 }
+
 const getSingleProduct = (productId: string) => {
     const result = Product.findById(productId)
     return result

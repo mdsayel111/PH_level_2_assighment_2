@@ -19,7 +19,10 @@ export const getAllProduct = async (req: Request, res: Response, next: NextFunct
     try {
         const query = req.query
         const queryLength = Object.keys(query).length
+        console.log(query)
+        // if query exist
         if (queryLength > 0) {
+            // search products
             const result = await productService.searchProduct(query as Record<string, string>)
             return res.status(200).send({
                 success: true,
