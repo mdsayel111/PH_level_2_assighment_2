@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import orderService from "./order.service";
+import { CustomError } from "../../customError";
 
 export const creatOrder = async (
   req: Request,
@@ -20,7 +21,12 @@ export const creatOrder = async (
       status: false,
       message: "Insufficient quantity available in inventory",
     });
-  } catch (error) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    if (error.name === "ZodError") {
+      // eslint-disable-next-line no-ex-assign
+      error = new CustomError(error.issues[0].message, error)
+    }
     next(error);
   }
 };

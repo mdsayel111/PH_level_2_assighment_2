@@ -34,9 +34,10 @@ app.use(
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         next: NextFunction,
     ): void => {
+        console.log(error)
         res.status(500).send({
             success: false,
-            message: error.issues[0].message,
+            message: error.message,
             error,
         });
     },

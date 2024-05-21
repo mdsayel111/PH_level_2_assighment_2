@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from "express";
 import productService from "./product.service";
+import { CustomError } from "../../customError";
 
 export const creatProduct = async (
   req: Request,
@@ -15,7 +16,11 @@ export const creatProduct = async (
       message: "Product created successfully!",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === "ZodError") {
+      // eslint-disable-next-line no-ex-assign
+      error = new CustomError(error.issues[0].message, error)
+    }
     next(error);
   }
 };
