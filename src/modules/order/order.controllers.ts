@@ -21,11 +21,11 @@ export const creatOrder = async (
       status: false,
       message: "Insufficient quantity available in inventory",
     });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error.name === "ZodError") {
       // eslint-disable-next-line no-ex-assign
-      error = new CustomError(error.issues[0].message, error)
+      error = new CustomError(error.issues[0].message, error);
     }
     next(error);
   }
@@ -44,10 +44,17 @@ export const getOrder = async (
       const result = await orderService.getOrderByEmail(
         query as Record<string, string>,
       );
-      return res.status(200).send({
+      // if data find by email
+      if (result.length > 0) {
+        return res.status(200).send({
+          status: true,
+          message: "Orders fetched successfully!",
+          data: result,
+        });
+      }
+      return res.status(404).send({
         status: false,
-        message: "Orders fetched successfully!",
-        data: result,
+        message: "Order not found",
       });
     }
     const result = await orderService.getAllOrder();

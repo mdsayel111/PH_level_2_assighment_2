@@ -12,35 +12,38 @@ app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+  res.send("Hello World!");
 });
 
 // not found route handler
 app.all("*", (req: Request, res: Response) => {
-    res.status(404).send({
-        success: false,
-        message: "No route found!",
-    });
+  res.status(404).send({
+    success: false,
+    message: "No route found!",
+  });
 });
 
 // global error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(
-    (
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        error: any,
-        req: Request,
-        res: Response,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        next: NextFunction,
-    ): void => {
-        console.log(error)
-        res.status(500).send({
-            success: false,
-            message: error.message,
-            error,
-        });
-    },
+  (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    error: any,
+    req: Request,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ): void => {
+    try {
+      res.status(500).send({
+        success: false,
+        message: error.message,
+        error,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
 );
 
 export default app;

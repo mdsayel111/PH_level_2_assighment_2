@@ -10,7 +10,7 @@ const creatOrder = async (orderData: TOrder) => {
 
   // if product in stock
   if (availableQuantity >= 0 && product?.inventory?.inStock) {
-    orderValidateSchema.parse(orderData)
+    orderValidateSchema.parse(orderData);
     const result = await Order.create(orderData);
     if (result) {
       // decrease quantity of product

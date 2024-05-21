@@ -19,7 +19,7 @@ export const creatProduct = async (
   } catch (error: any) {
     if (error.name === "ZodError") {
       // eslint-disable-next-line no-ex-assign
-      error = new CustomError(error.issues[0].message, error)
+      error = new CustomError(error.issues[0].message, error);
     }
     next(error);
   }
@@ -33,7 +33,6 @@ export const getAllProduct = async (
   try {
     const query = req.query;
     const queryLength = Object.keys(query).length;
-    console.log(query);
     // if query exist
     if (queryLength > 0) {
       // search products

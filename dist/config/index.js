@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var __createBinding =
   (this && this.__createBinding) ||
   (Object.create
@@ -7,7 +7,7 @@ var __createBinding =
         var desc = Object.getOwnPropertyDescriptor(m, k);
         if (
           !desc ||
-          ('get' in desc ? !m.__esModule : desc.writable || desc.configurable)
+          ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)
         ) {
           desc = {
             enumerable: true,
@@ -26,10 +26,10 @@ var __setModuleDefault =
   (this && this.__setModuleDefault) ||
   (Object.create
     ? function (o, v) {
-        Object.defineProperty(o, 'default', { enumerable: true, value: v });
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
       }
     : function (o, v) {
-        o['default'] = v;
+        o["default"] = v;
       });
 var __importStar =
   (this && this.__importStar) ||
@@ -38,13 +38,13 @@ var __importStar =
     var result = {};
     if (mod != null)
       for (var k in mod)
-        if (k !== 'default' && Object.prototype.hasOwnProperty.call(mod, k))
+        if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
           __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
   };
-Object.defineProperty(exports, '__esModule', { value: true });
-const dotenv = __importStar(require('dotenv'));
+Object.defineProperty(exports, "__esModule", { value: true });
+const dotenv = __importStar(require("dotenv"));
 dotenv.config();
 // export .env variable
 exports.default = {
