@@ -1,6 +1,7 @@
 import { Product } from "../product/product.schema";
 import { Order } from "./order.schema";
 import { TOrder } from "./order.types";
+import { orderValidateSchema } from "./order.validation.schema";
 
 const creatOrder = async (orderData: TOrder) => {
   const product = await Product.findById(orderData.productId);
@@ -9,6 +10,7 @@ const creatOrder = async (orderData: TOrder) => {
 
   // if product in stock
   if (availableQuantity >= 0 && product?.inventory?.inStock) {
+    orderValidateSchema.parse(orderData)
     const result = await Order.create(orderData);
     if (result) {
       // decrease quantity of product

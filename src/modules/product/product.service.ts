@@ -1,9 +1,10 @@
 import { Product } from "./product.schema";
 import { TProduct } from "./product.types";
-import { productValidationSchema } from "./product.validation.schema";
+import { productValidateSchema } from "./product.validation.schema";
+
 
 const creatProduct = (data: TProduct) => {
-  const isValidate = productValidationSchema.parse(data)
+  const isValidate = productValidateSchema.parse(data)
   console.log(isValidate)
   const result = Product.create(data);
   return result;
