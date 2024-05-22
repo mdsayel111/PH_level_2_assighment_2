@@ -42,7 +42,7 @@ const updateSingleProduct = async (productId: string, productData: any) => {
         ...updateDoc,
         inventory: {
           inStock: true,
-          quantity: productData?.inventory?.quantity,
+          quantity: availableQuantity,
         },
       };
     }
