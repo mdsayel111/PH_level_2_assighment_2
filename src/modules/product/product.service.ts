@@ -26,9 +26,18 @@ const getSingleProduct = (productId: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const updateSingleProduct = (productId: string, productData: any) => {
+const updateSingleProduct = async (productId: string, productData: any) => {
+  const productFromDB = await Product.findById(productId)
+  let updateDoc = productData
+  // if user want to update quantity
+  if (typeof productData?.inventory?.quantity !== "undefined") {
+    const availableQuantity = productFromDB?.inventory?.quantity + productData?.inventory?.quantity
+    if (availableQuantity > 0) {
+      updateDoc = { ...updateDoc, inventory: { inStock: true, quantity: productData?.inventory?.quantity } }
+    }
+  }
   productUpdateValidationSchema.safeParse(productData)
-  const result = Product.findOneAndUpdate({ _id: productId }, productData, {
+  const result = Product.findOneAndUpdate({ _id: productId }, updateDoc, {
     new: true,
     runValidators: true
   });
