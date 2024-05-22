@@ -2,11 +2,11 @@
 import express, { NextFunction, Request, Response } from "express";
 import { productRouter } from "./modules/product/product.route";
 import { orderRouter } from "./modules/order/order.router";
-import cors from "cors"
+import cors from "cors";
 const app = express();
 
 // cors setup
-app.use(cors({ origin: "*", credentials: true }))
+app.use(cors({ origin: "*", credentials: true }));
 
 // parse json
 app.use(express.json());
@@ -50,7 +50,6 @@ app.use(
         success: false,
         message: "Something went wrong",
       });
-
     } catch (error) {
       console.log(error);
     }

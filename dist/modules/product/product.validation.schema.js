@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productValidateSchema = void 0;
+exports.productUpdateValidationSchema = exports.productValidateSchema = void 0;
 const zod_1 = require("zod");
 const variantValidateSchema = zod_1.z.object({
     type: zod_1.z.string({
@@ -42,3 +42,4 @@ exports.productValidateSchema = zod_1.z.object({
         message: "Inventory must have a valid quantity and inStock status.",
     }),
 });
+exports.productUpdateValidationSchema = exports.productValidateSchema.partial();

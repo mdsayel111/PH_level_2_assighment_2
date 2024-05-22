@@ -7,7 +7,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const product_route_1 = require("./modules/product/product.route");
 const order_router_1 = require("./modules/order/order.router");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+// cors setup
+app.use((0, cors_1.default)({ origin: "*", credentials: true }));
 // parse json
 app.use(express_1.default.json());
 // routes
@@ -31,10 +34,16 @@ error, req, res,
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 next) => {
     try {
+        if (error.name === "ZodError") {
+            res.status(500).send({
+                success: false,
+                message: error.issues[0].message,
+                error,
+            });
+        }
         res.status(500).send({
             success: false,
-            message: error.message,
-            error,
+            message: "Something went wrong",
         });
     }
     catch (error) {

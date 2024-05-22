@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.orderValidateSchema = void 0;
+exports.orderUpdateValidationSchema = exports.orderValidateSchema = void 0;
 const zod_1 = require("zod");
 const mongoose_1 = require("mongoose");
 // Validate ObjectId using regex pattern for MongoDB ObjectId
@@ -22,3 +22,4 @@ exports.orderValidateSchema = zod_1.z.object({
         .int({ message: "Quantity must be a number." })
         .positive({ message: "Quantity must be a positive integer" }),
 });
+exports.orderUpdateValidationSchema = exports.orderValidateSchema.partial();

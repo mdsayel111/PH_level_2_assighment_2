@@ -1,6 +1,9 @@
 import { Product } from "./product.schema";
 import { TProduct } from "./product.types";
-import { productUpdateValidationSchema, productValidateSchema } from "./product.validation.schema";
+import {
+  productUpdateValidationSchema,
+  productValidateSchema,
+} from "./product.validation.schema";
 
 const creatProduct = (data: TProduct) => {
   productValidateSchema.parse(data);
@@ -27,19 +30,27 @@ const getSingleProduct = (productId: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const updateSingleProduct = async (productId: string, productData: any) => {
-  const productFromDB = await Product.findById(productId)
-  let updateDoc = productData
+  const productFromDB = await Product.findById(productId);
+  let updateDoc = productData;
   // if user want to update quantity
   if (typeof productData?.inventory?.quantity !== "undefined") {
-    const availableQuantity = productFromDB?.inventory?.quantity + productData?.inventory?.quantity
+    const availableQuantity =
+      productFromDB?.inventory?.quantity + productData?.inventory?.quantity;
+    // if quantity is getter than 0 then set inStock true
     if (availableQuantity > 0) {
-      updateDoc = { ...updateDoc, inventory: { inStock: true, quantity: productData?.inventory?.quantity } }
+      updateDoc = {
+        ...updateDoc,
+        inventory: {
+          inStock: true,
+          quantity: productData?.inventory?.quantity,
+        },
+      };
     }
   }
-  productUpdateValidationSchema.safeParse(productData)
+  productUpdateValidationSchema.safeParse(productData);
   const result = Product.findOneAndUpdate({ _id: productId }, updateDoc, {
     new: true,
-    runValidators: true
+    runValidators: true,
   });
   return result;
 };

@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSingleProduct = exports.updateSingleProduct = exports.getSingleProduct = exports.getAllProduct = exports.creatProduct = void 0;
 const product_service_1 = __importDefault(require("./product.service"));
-const customError_1 = require("../../customError");
 const creatProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const productData = req.body;
@@ -26,10 +25,6 @@ const creatProduct = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         });
     }
     catch (error) {
-        if (error.name === "ZodError") {
-            // eslint-disable-next-line no-ex-assign
-            error = new customError_1.CustomError(error.issues[0].message, error);
-        }
         next(error);
     }
 });

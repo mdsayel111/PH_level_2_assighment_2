@@ -79,7 +79,7 @@ export const updateSingleProduct = async (
     const productData = req.body;
     const result = await productService.updateSingleProduct(
       productId,
-      productData
+      productData,
     );
     res.status(200).send({
       success: true,
