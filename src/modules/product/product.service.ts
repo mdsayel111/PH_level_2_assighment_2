@@ -1,6 +1,6 @@
 import { Product } from "./product.schema";
 import { TProduct } from "./product.types";
-import { productValidateSchema } from "./product.validation.schema";
+import { productUpdateValidationSchema, productValidateSchema } from "./product.validation.schema";
 
 const creatProduct = (data: TProduct) => {
   productValidateSchema.parse(data);
@@ -27,8 +27,10 @@ const getSingleProduct = (productId: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const updateSingleProduct = (productId: string, productData: any) => {
+  productUpdateValidationSchema.safeParse(productData)
   const result = Product.findOneAndUpdate({ _id: productId }, productData, {
-    returnDocument: "after",
+    new: true,
+    runValidators: true
   });
   return result;
 };

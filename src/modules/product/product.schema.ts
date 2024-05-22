@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import { TInventory, TProduct, TVariant } from "./product.types";
-// import { productValidationSchema } from "./product.validation.schema";
 
 const inventorySchema = new Schema<TInventory>({
   inStock: Boolean,
@@ -16,6 +15,7 @@ const productSchema = new Schema<TProduct>({
   price: { type: Number, required: [true, "Price is required"] },
   category: { type: String, required: [true, "Category is required"] },
   description: { type: String, required: [true, "Description is required"] },
+  tags: { type: [String], required: [true, "Tags is required"] },
   inventory: {
     type: inventorySchema,
     required: [true, "Inventory is required"],
@@ -29,10 +29,5 @@ const productSchema = new Schema<TProduct>({
     default: false,
   },
 });
-
-// productSchema.pre("save", async function (next) {
-//   productValidationSchema.parse(this)
-//   next()
-// })
 
 export const Product = model<TProduct>("Product", productSchema);

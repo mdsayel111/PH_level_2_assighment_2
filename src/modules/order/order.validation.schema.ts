@@ -21,3 +21,5 @@ export const orderValidateSchema = z.object({
     .int({ message: "Quantity must be a number." })
     .positive({ message: "Quantity must be a positive integer" }),
 });
+
+export const orderUpdateValidationSchema = orderValidateSchema.partial()
