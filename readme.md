@@ -101,30 +101,5 @@ https://ph-level-2-assighment-2-1.onrender.com/
 - /api/orders (GET)
 - /api/orders?email=level2@programming-hero.com (GET)
 
-    
-
-
-
-
-## Running command
-
-To run project locally, run the following command
-
-```bash
-  npm run dev
-```
-
-To build project locally, run the following command
-
-```bash
-  npm run build
-```
-
-To build build version, run the following command
-
-```bash
-  npm run start
-```
-
 
 
